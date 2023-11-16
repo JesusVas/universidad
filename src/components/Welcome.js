@@ -3,11 +3,11 @@ import Layout from "./Layout";
 import Departments from "./Departaments";
 import Footer from "./Footer";
 import { Box } from "@mui/material";
-const Welcome=()=>{
+const Welcome=({ username })=>{
     return(
       <Box>
         <Layout/>
-        <MainBanner/>
+        <MainBanner username={username}/>
         <Departments/>
         <Footer/>
       </Box>

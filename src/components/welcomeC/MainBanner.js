@@ -2,8 +2,34 @@ import Carousel from 'react-material-ui-carousel';
 import {Button, ListItem,ListItemText,Box,CardMedia,Grid,Card,Paper,Typography} from '@mui/material';
 import styled from '@emotion/styled';
 import gato from "../gato.jpg"
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-const MainBanner=()=>{
+const MainBanner=({username})=>{
+  const [item,setItem]=useState([]);
+  const [nombre,setNombre]=useState("");
+  useEffect(()=>{
+    fetch("http://localhost/odontologia/DatosUsuario.php").then(res=>res.json())
+    .then(
+      (result)=>{
+        setItem(result);
+      }
+    )
+  },[]
+  )
+  
+  useEffect(() => {
+    if (item.length > 0) {
+      for (let i = 0; i < item.length; i++) {
+        const currentItem = item[i];
+        if (currentItem.username === username) {
+          setNombre(currentItem.name);
+          break;
+        }
+      }
+    }
+  }, [item, username]);
+  
   const StyledCardContainer = styled(Card)(() => ({
     // height: 400,
     height: '70vh',
@@ -30,7 +56,7 @@ const MainBanner=()=>{
   }));
     let items = [
         {
-            name: "Random Name #1",
+            name: `Hola ${nombre}`,
             description: "Probably the most random thing you have ever seen!",
             img: gato
         },
@@ -46,6 +72,7 @@ const MainBanner=()=>{
       },
     ]
     return(
+    <div>
     <Carousel>
       {items.map((item, index) => (
         <StyledCardContainer key={index}>
@@ -61,8 +88,10 @@ const MainBanner=()=>{
           </StyledTextContainer>
         </StyledCardContainer>
       ))}
-      
+     
     </Carousel>
+    
+    </div>
     )
 };
 export default MainBanner;

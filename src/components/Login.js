@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Container, Typography, TextField, Button, Link } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Welcome from './Welcome';
 
-function Login({ setIsLoggedIn }) {
-  const [username, setUsername] = useState('');
+function Login({ setIsLoggedIn,username,setUsername }) {
+  console.log(username);
   const [password, setPassword] = useState('');
+  const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,8 +18,10 @@ function Login({ setIsLoggedIn }) {
     axios.post(url,fData).then(response=>{
       if(response.data==="Inicio de sesion exitoso"){
       setIsLoggedIn(true);
+      <Welcome username={username}/>
       alert(response.data);
-      navigate('/welcome')
+      navigate('/welcome');
+      
       }
       else if(response.data==="Contraseña incorrecta"){
         alert(response.data);
@@ -31,6 +35,7 @@ function Login({ setIsLoggedIn }) {
   return (
     <Container maxWidth="xs">
       <div>
+        <div>{username}</div>
         <Typography variant="h5">Iniciar Sesión</Typography>
         <form onSubmit={handleSubmit}>
           <TextField
