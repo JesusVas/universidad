@@ -4,6 +4,7 @@ import Register from './components/Register';
 import Home from './components/Home';
 import Horario from './components/Horario';
 import Welcome from './components/Welcome';
+import MembersInfo from './components/Members';
 import { useState } from 'react';
 
 
@@ -18,9 +19,9 @@ function App() {
       <Route path="/register" element={<Register/>}></Route>
       {isLoggedIn ? (
         <>
-        <Route path="/horario"  element={<Horario/>}></Route>
+        <Route path="/horario"  element={<Horario username={username}/>}></Route>
         <Route path="/welcome" element={<Welcome username={username}/>}></Route>
-        
+        <Route path="/members" element={<MembersInfo/>}></Route>
         </>
         ) : (
         <>

@@ -21,7 +21,7 @@ const StyledButton = styled(Button)(() => ({
   marginRight:"100px",
   "&:hover": {
     border: "1px solid #808080",
-    backgroundColor: "#808080",
+    backgroundColor: "#FF0000",
     color: "white",
   },
   opacity: 1,

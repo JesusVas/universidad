@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Welcome from './Welcome';
 
 function Login({ setIsLoggedIn,username,setUsername }) {
-  console.log(username);
+
   const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ function Login({ setIsLoggedIn,username,setUsername }) {
   return (
     <Container maxWidth="xs">
       <div>
-        <div>{username}</div>
+        
         <Typography variant="h5">Iniciar Sesión</Typography>
         <form onSubmit={handleSubmit}>
           <TextField

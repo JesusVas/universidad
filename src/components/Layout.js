@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import {Box,styled} from '@mui/material';
 import Logo from './logo.png';
-import { Twitter,FacebookRounded,Instagram } from '@mui/icons-material';
+import { FacebookRounded,Instagram, YouTube } from '@mui/icons-material';
 
 const pages = ['Reportar un error','Quienes Somos'];
 
@@ -29,7 +29,7 @@ const Layout=()=> {
   return (
     <StyledBox display="flex" justifyContent="center" sx={{backgroundColor:"#00ced1"}}>
       <Box sx={{ width: { xs: "100%", md: "75%" }, height: "100%" }}>
-      <AppBar position="static" sx={{backgroundColor:" #00ced1", borderTop: 'none'}}>
+      <AppBar position="static" sx={{backgroundColor:" #00ced1",boxShadow: 'none' }}>
       
         <Toolbar disableGutters>
         <Box display="flex" justifyContent="center" >
@@ -92,22 +92,22 @@ const Layout=()=> {
               
               
             }}>Siguenos en :</Typography>
-          <FacebookRounded
-                  onClick={()=> window.open('https://www.facebook.com/SolidarSuizaBolivia', '_blank')}
+                <FacebookRounded
+                  onClick={()=> window.open('https://www.facebook.com/UniversidadLoyolaDeBolivia/?locale=es_LA', '_blank')}
                   sx={{
                     color: "white",
                     "&:hover": { color: "red" },
                   }}
                 />
                 <Instagram
-                  onClick={()=> window.open('https://www.instagram.com/solidarsuiza', '_blank')}
+                  onClick={()=> window.open('https://www.instagram.com/universidadloyoladebolivia/?hl=es', '_blank')}
                   sx={{
                     color:"white",
                     "&:hover": { color: "red" },
                   }}
                 />
-                <Twitter
-                  onClick={()=> window.open('https://twitter.com/SolidarSuizabo', '_blank')}
+                <YouTube
+                  onClick={()=> window.open('https://www.youtube.com/@universidadloyoladebolivia1336', '_blank')}
                   sx={{
                     color: "white",
                     "&:hover": { color: "red" },

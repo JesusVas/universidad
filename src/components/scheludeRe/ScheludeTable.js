@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const ScheludeTable = () => {
+const ScheludeTable = ({username}) => {
   const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const horas = Array.from({ length: 13 }, (_, i) => 8 + i);
@@ -45,9 +45,10 @@ const ScheludeTable = () => {
   return (
     <Box>
       <Box sx={{ flexGrow: 0 }}>
+          {username}
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 ,backgroundColor:"#ff9d00"}}>
+                <Avatar alt="Remy Sharp" >{username.charAt(0)}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu

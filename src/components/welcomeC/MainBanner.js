@@ -1,13 +1,18 @@
 import Carousel from 'react-material-ui-carousel';
-import {Button, ListItem,ListItemText,Box,CardMedia,Grid,Card,Paper,Typography} from '@mui/material';
+import {CardMedia,Card,Paper,Typography,Button} from '@mui/material';
 import styled from '@emotion/styled';
-import gato from "../gato.jpg"
-import axios from 'axios';
+import image1 from "../assets/sample1.jpg";
+import image2 from "../assets/sample2.jpg";
+import image3 from "../assets/sample3.jpg";
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const MainBanner=({username})=>{
   const [item,setItem]=useState([]);
   const [nombre,setNombre]=useState("");
+  const navigate = useNavigate();
+
   useEffect(()=>{
     fetch("http://localhost/odontologia/DatosUsuario.php").then(res=>res.json())
     .then(
@@ -56,23 +61,25 @@ const MainBanner=({username})=>{
   }));
     let items = [
         {
-            name: `Hola ${nombre}`,
-            description: "Probably the most random thing you have ever seen!",
-            img: gato
+            name: `¡Hola ${nombre}! Bienvenido a la Clínica Sonrisas Felices`,
+            description: "Estamos encantados de tenerte con nosotros. En nuestra clínica, nos esforzamos por brindar el mejor cuidado dental para asegurarnos de que tu sonrisa siempre luzca radiante.",
+            img: image1
         },
         {
-            name: "Random Name #2",
-            description: "Hello World!",
-            img: gato
+            name: `${nombre} ¿Estás listo para cuidar de tu sonrisa?`,
+            description: "Haz clic en el boton de abajo para reservar tu cita y dar el primer paso hacia una salud bucal óptima.",
+            img: image2,
+            link:"/horario"
         },
         {
-          name: "Random Name #3",
-          description: "Hello World!",
-          img: gato
+          name: `${nombre}¿Deseas disfrutar de beneficios exclusivos?`,
+          description: "Obtén tu tarjeta de membresía de la Clínica Sonrisas Felices hoy mismo. Con nuestra membresía, accederás a descuentos especiales, promociones y un cuidado dental personalizado. ¡Haz clic abajo para obtener informacion de como solicitar la tuya!",
+          img: image3,
+          link:"/members"
       },
     ]
     return(
-    <div>
+
     <Carousel>
       {items.map((item, index) => (
         <StyledCardContainer key={index}>
@@ -82,16 +89,20 @@ const MainBanner=({username})=>{
           height="100%"
           image={item.img}
         />
-        <StyledTextContainer>
-            <Typography variant="h5">{item.name}</Typography>
-            <Typography>{item.description}</Typography>
+          <StyledTextContainer>
+              <Typography variant="h5">{item.name}</Typography>
+              <Typography>{item.description}</Typography>
+              {item.link && (
+                <Button variant="contained" color="primary" sx={{color:"#000000" ,'&:hover': {backgroundColor: "#FF0000",color:"white"}}} onClick={() => navigate(item.link)}>
+                  Saber mas
+                </Button>
+              )}
           </StyledTextContainer>
         </StyledCardContainer>
       ))}
      
     </Carousel>
-    
-    </div>
+   
     )
 };
 export default MainBanner;
