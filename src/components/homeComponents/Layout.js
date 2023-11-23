@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import {Box,styled} from '@mui/material';
-import Logo from './logo.png';
+import Logo from '../assets/logo.png';
 import { FacebookRounded,Instagram, YouTube } from '@mui/icons-material';
 
 const pages = ['Reportar un error','Quienes Somos'];

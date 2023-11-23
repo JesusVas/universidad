@@ -6,7 +6,7 @@ import Horario from './components/Horario';
 import Welcome from './components/Welcome';
 import MembersInfo from './components/Members';
 import { useState } from 'react';
-
+import RecoverPass from './components/RecoverPass';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -14,22 +14,33 @@ function App() {
   return (
     <Router>
       <Routes>
-      <Route path="/" element={<Home/>}></Route>
-      <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername}/>} />
-      <Route path="/register" element={<Register/>}></Route>
-      {isLoggedIn ? (
-        <>
-        <Route path="/horario"  element={<Horario username={username}/>}></Route>
-        <Route path="/welcome" element={<Welcome username={username}/>}></Route>
-        <Route path="/members" element={<MembersInfo/>}></Route>
-        </>
-        ) : (
-        <>
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="*" element={<Navigate to="/login" />} />
-        <Route path="/register" element={<Register/>}></Route>
-        </>
-        )}
+      <Route path="/" element={isLoggedIn ? <Navigate to="/welcome" /> : <Home />} />
+
+        <Route
+          path="/login"
+          element={
+            isLoggedIn ? <Navigate to="/welcome" /> : <Login setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} />
+          }
+        />
+
+        
+        <Route
+          path="/register"
+          element={isLoggedIn ? <Navigate to="/welcome" /> : <Register />}
+        />
+
+        <Route
+          path="/recover"
+          element={isLoggedIn ? <Navigate to="/recover" /> : <RecoverPass />}
+        />
+
+        {isLoggedIn ? (
+          <>
+            <Route path="/horario" element={<Horario username={username} setIsLoggedIn={setIsLoggedIn}/>} />
+            <Route path="/welcome" element={<Welcome username={username} />} />
+            <Route path="/members" element={<MembersInfo />} />
+          </>
+        ) : null}
       </Routes>
     </Router>
   );

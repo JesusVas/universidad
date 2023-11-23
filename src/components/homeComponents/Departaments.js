@@ -1,9 +1,9 @@
 import { Box, Grid, Typography, styled } from "@mui/material";
 import DepartmentBox from "./DepartmentBox";
-import r1 from "./cbba.png";
-import r2 from "./tarija.png";
-import r3 from "./lapaz.png";
-import r4 from "./scz.png";
+import r1 from "../assets/cbba.png";
+import r2 from "../assets/tarija.png";
+import r3 from "../assets/lapaz.png";
+import r4 from "../assets/scz.png";
 
 const StyledBox = styled(Box)(() => ({
   margin: 0,

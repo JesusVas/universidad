@@ -1,5 +1,5 @@
 import { Box, styled, Typography ,Button} from "@mui/material";
-import diente from "./diente.png";
+import diente from "../assets/diente.png";
 import { Link } from "react-router-dom";
 
 const StyledBox = styled(Box)(() => ({

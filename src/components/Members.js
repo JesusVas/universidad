@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import Layout from "./Layout";
+import Layout from "./homeComponents/Layout";
 import Info from "./membersComponents/Info";
-import Footer from "./Footer";
+import Footer from "./homeComponents/Footer";
 const MembersInfo=()=>{
     return(
         <Box>

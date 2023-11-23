@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import Layout from './Layout';
-import Footer from './Footer';
-import MainBanner from './MainBanner';
-import Departments from './Departaments';
+import Layout from './homeComponents/Layout';
+import Footer from './homeComponents/Footer';
+import MainBanner from './homeComponents/MainBanner';
+import Departments from './homeComponents/Departaments';
 
 function Home() {
   return (

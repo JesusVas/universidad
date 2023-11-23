@@ -1,5 +1,5 @@
 import { Box, Typography, styled } from "@mui/material";
-import marcaSwe from "./gato.jpg";
+import marcaSwe from "../assets/gato.jpg";
 
 const StyledImg = styled("img")(() => ({
   height: "100%",

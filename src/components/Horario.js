@@ -1,8 +1,8 @@
 import ScheludeTable from "./scheludeRe/ScheludeTable";
 
-const Horario = ({username}) => {
+const Horario = ({username,setIsLoggedIn}) => {
   return(
-    <ScheludeTable username={username}/>
+    <ScheludeTable username={username} setIsLoggedIn={setIsLoggedIn}/>
   )
 };
 

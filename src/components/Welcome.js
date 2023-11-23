@@ -1,7 +1,7 @@
 import MainBanner from "./welcomeC/MainBanner";
-import Layout from "./Layout";
-import Departments from "./Departaments";
-import Footer from "./Footer";
+import Layout from "./homeComponents/Layout";
+import Departments from "./homeComponents/Departaments";
+import Footer from "./homeComponents/Footer";
 import { Box } from "@mui/material";
 const Welcome=({ username })=>{
     return(
