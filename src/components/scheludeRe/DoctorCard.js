@@ -2,11 +2,13 @@ import { Card,CardContent,Typography,CardMedia, Box,Modal } from "@mui/material"
 import { useState } from "react";
 import FormDate from "./FormDate";
 
-const DoctorCard = ({ name, imageSrc}) => {
+const DoctorCard = ({ name, imageSrc,nombreUsuario,apellidos,setNombreUsuario,setApellidos}) => {
   const [showForm, setShowForm] = useState(false);
+  const [doctor,setDoctor]=useState("");
 
-  const handleClick = () => {
+  const handleClick = (value) => {
     setShowForm(true);
+    setDoctor(value);
   }
 
   const handleCloseForm = () => {
@@ -14,11 +16,12 @@ const DoctorCard = ({ name, imageSrc}) => {
   }
   return (
     <Box>
-      <Card onClick={handleClick}>
+      <Card  onClick={() => handleClick(name)}>
         <CardMedia component="img" alt={name} image={imageSrc} sx={{ objectFit: 'cover',height: 200 }}/>
         <CardContent>
           <Typography variant="h6">{name}</Typography>
         </CardContent>
+       
       </Card>
       <Modal
         open={showForm}
@@ -37,7 +40,7 @@ const DoctorCard = ({ name, imageSrc}) => {
             boxShadow: 24,
             p: 4,
             }}>
-            <FormDate onClose={handleCloseForm} />
+            <FormDate doctor={doctor} onClose={handleCloseForm} nombreUsuario={nombreUsuario} apellidos={apellidos} setNombreUsuario={setNombreUsuario} setApellidos={setApellidos}/>
             </Box>
       </Modal>
     </Box>

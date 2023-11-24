@@ -8,6 +8,7 @@ function Register() {
 
   const [name,setName]=useState("");
   const [username,setUsername]=useState("");
+  const [apellidos,setApellidos]=useState("");
   const [password,setPassword]=useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const[email,setEmail]=useState("");
@@ -22,6 +23,7 @@ function Register() {
     const url="http://localhost/odontologia/CrearUsuario.php";
     let fData=new FormData();
     fData.append('name',name);
+    fData.append('apellidos',apellidos);
     fData.append('username',username);
     fData.append('password',password);
     fData.append('email',email);
@@ -51,6 +53,17 @@ function Register() {
             name="name"
             value={name}
             onChange={(e)=>setName(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            type="text"
+            label="Apellidos"
+            name="apellidos"
+            value={apellidos}
+            onChange={(e)=>setApellidos(e.target.value)}
           />
           <TextField
             variant="outlined"

@@ -1,26 +1,65 @@
 import { TextField,Button,Container,Typography } from "@mui/material";
-import { useState } from "react";
-const FormDate=({onClose})=>{
-    const [name,setName]=useState("");
-    const [username,setUsername]=useState("");
-    const [password,setPassword]=useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const[email,setEmail]=useState("");
-    const [edad,setEdad]=useState(3);
+import { useState,useEffect } from "react";
+import axios from "axios";
+const FormDate=({onClose,doctor,nombreUsuario,apellidos,setApellidos,setNombreUsuario})=>{
+    
+    
+    const [fecha, setFecha] = useState('');
+    const [hora, setHora] = useState('');
+    const [horaError, setHoraError] = useState(false);
+
+    const validarHora = (hora) => {
+      const horaMin = new Date(fecha);
+      horaMin.setHours(8, 0, 0); 
+      const horaMax = new Date(fecha);
+      horaMax.setHours(20, 0, 0); 
+  
+      const horaSeleccionada = new Date(fecha);
+      const [horaInput, minutosInput] = hora.split(':');
+      
+      if (parseInt(minutosInput, 10) !== 0) {
+        return false; 
+      }
+  
+      horaSeleccionada.setHours(parseInt(horaInput, 10), 0, 0);
+  
+      return horaSeleccionada >= horaMin && horaSeleccionada <= horaMax;
+    };
+
+    useEffect(() => {
+      const today = new Date().toISOString().split('T')[0];
+      setFecha(today);
+    }, []);
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      // Aquí puedes agregar la lógica para enviar los datos del formulario
-      // Puedes usar las variables de estado (name, username, password, etc.) para obtener los valores
-      // y realizar acciones como enviar una solicitud a tu servidor
-      // ...
-  
-      // Después de manejar la lógica del formulario, cierra el formulario
+      if (!validarHora(hora)) {
+        setHoraError(true);
+        return;
+      }
+
+    const url="http://localhost/odontologia/CrearFichas.php";
+    let fData=new FormData();
+    fData.append('nombreUsuario',nombreUsuario);
+    fData.append('apellidos',apellidos);
+    fData.append('fecha',fecha);
+    fData.append('doctor',doctor);
+    fData.append('hora',hora);
+    axios.post(url,fData).then(response=>{
+      if(response.data==="¡Ficha Reservada!"){alert(response.data)}
+      else if(response.data==="La hora con el doctor en la fecha seleccionada ya esta reservada.Intentelo de nuevo."){
+        alert(response.data);
+      }
+      else if(response.data==="Error"){
+        alert(response.data);
+      }
+    }).catch(error=>alert(error));
+      
       onClose();
     };
   
     const handleCancel = () => {
-      // Si el usuario elige cancelar, simplemente cierra el formulario
+      
       onClose();
     };
     return(
@@ -28,6 +67,18 @@ const FormDate=({onClose})=>{
       <div>
         <Typography variant="h5">Reservar Cita</Typography>
         <form onSubmit={handleSubmit}>
+        <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            type="text"
+            label="Doctor"
+            name="doctor"
+            value={doctor}
+            
+            disabled
+          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -36,65 +87,46 @@ const FormDate=({onClose})=>{
             type="text"
             label="Nombre"
             name="name"
-            value={name}
-            onChange={(e)=>setName(e.target.value)}
+            value={nombreUsuario}
+            onChange={(e)=>setNombreUsuario(e.target.value)}
+            disabled
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            
-            label="Usuario"
-            name="username"
-            value={username}
-            onChange={(e)=>setUsername(e.target.value)}
+            type="text"
+            label="Apellidos"
+            name="apellidos"
+            value={apellidos}
+            onChange={(e)=>setApellidos(e.target.value)}
+            disabled
           />
           <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            type='email'
-            label="Email"
-            name="email"
-            value={email}
-            onChange={(e)=>setEmail(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Contraseña"
-            type="password"
-            value={password}
-            onChange={(e)=>setPassword(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="confirmPassword"
-            label="Confirma Contraseña"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="edad"
-            label="Edad"
-            type="number"
-            inputProps={{ min: "3" }}
-            value={edad}
-            onChange={(e)=>setEdad(e.target.value)}
-          />
+              fullWidth
+              id="date"
+              label="Fecha"
+              type="date"
+              variant="outlined"
+              value={fecha}
+              onChange={(e) => setFecha(e.target.value)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              disabled
+            />
+            <TextField
+              fullWidth
+              label="Hora"
+              type="time"
+              variant="outlined"
+              
+              value={hora}
+              onChange={(e) => setHora(e.target.value)}
+              error={hora !== '' && !validarHora(hora)}
+              helperText={hora !== '' && !validarHora(hora) && 'La hora debe estar entre 8 am y 8 pm, y ser en punto'}
+            />
           <Button
             type="submit"
             
